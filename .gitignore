@@ -24,4 +24,8 @@
 .regions
 .aws/
 
+# Terraform
+tf/.terraform/
+tf/.terraform.lock.hcl
+
 bin/
