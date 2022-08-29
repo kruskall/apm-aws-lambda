@@ -17,13 +17,14 @@ module "lambda_function" {
   }
 }
 
-module "lambda_layer_s3" {
+module "lambda_layer_local" {
   source = "terraform-aws-modules/lambda/aws"
 
   create_layer = true
 
   layer_name          = "apm-lambda-extension"
   description         = "AWS Lambda Extension Layer for Elastic APM"
+  compatible_runtimes = ["nodejs16.x"]
 
   source_path = "../bin/extensions/"
 }
