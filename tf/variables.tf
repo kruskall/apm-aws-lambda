@@ -10,3 +10,8 @@ variable "log_level" {
   default     = "trace"
 }
 
+variable "ec_region" {
+  type        = string
+  description = "ec region"
+  default     = "eu-central-1"
+}

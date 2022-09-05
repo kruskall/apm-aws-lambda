@@ -2,6 +2,29 @@ provider "aws" {
   region = var.aws_region
 }
 
+provider "ec" {}
+
+data "ec_stack" "latest" {
+  version_regex = "latest"
+  region        = var.ec_region
+}
+
+resource "ec_deployment" "ec_aws_lambda_minimal" {
+  name = "aws-lambda-smoke-testing-deployment"
+
+  region                 = "eu-central-1"
+  version                = data.ec_stack.latest.version
+  deployment_template_id = "aws-io-optimized-v2"
+
+  elasticsearch {}
+
+  kibana {}
+
+  observability {
+    deployment_id = ec_deployment.ec_aws_lambda_minimal.id
+  }
+}
+
 module "lambda_function" {
   source = "terraform-aws-modules/lambda/aws"
 
